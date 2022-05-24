@@ -1,10 +1,11 @@
 const express = require('express');
 const morgan = require('morgan');
-
 const app = express();
+
 app.listen(3000, (req, res) => {
 	console.log('listening on port 3000...')
 })
+
 // add your code here
 let arr = [
 	{
@@ -27,8 +28,12 @@ let arr = [
 	}
 ]; 
 
-app.get('/api/TodoItems', (req, res) => {
-   res.arr.send(todoItemId);
-}); 
+app.get('/', (req, res) => {
+	res.status(200).send("ok!");
+ });
+
+ app.get('/api/TodoItems', (req, res) => {
+	res.send(arr);
+ });
 
 module.exports = app;
