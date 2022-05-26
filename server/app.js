@@ -1,11 +1,13 @@
 const express = require('express');
 const morgan = require('morgan');
 const app = express();
+const bodyParser = require('body-parser'); //parses incoming data into json object
 
 app.listen(3000, (req, res) => {
 	console.log('listening on port 3000...')
 })
 
+app.use(bodyParser.json());
 // add your code here
 let arr = [
 	{
@@ -29,11 +31,27 @@ let arr = [
 ]; 
 
 app.get('/', (req, res) => {
-	res.status(200).send("ok!");
+	if(req.url = '/') {
+		res.status(200).json({status: 'ok'});
+	}
  });
 
  app.get('/api/TodoItems', (req, res) => {
 	res.send(arr);
  });
+
+ app.post('/api/TodoItems', (req, res) => {
+	//given an object
+	const obj = {id: ''};
+	const match = object.id;
+	//if the id of the incoming object matches an id in the array, replace
+	if(req.obj == match) {
+		
+	}
+	//if there is no match, add object to the array  
+	
+	res.json(req.body);
+
+ })
 
 module.exports = app;
