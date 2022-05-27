@@ -8,8 +8,6 @@ app.listen(3000, (req, res) => {
 })
 
 app.use(bodyParser.json());//this is the middleware
-
-
 //store the object inside of an array
 let arr = [
 	{
@@ -48,19 +46,25 @@ app.get('/', (req, res) => {
  //POST responds with items and a status of 201
  app.post('/api/TodoItems', (req, res) => {
 	//given an object
-
-	const obj = {id: ''};
 	//const task = arr.find([0]);
 	let index = arr.findIndex(task => task['todoItemId'] == req.body['todoItemId'])
-	arr.splice(task)
-	arr.push(req.body);
-
 	//if the id of the incoming object matches an id in the array, replace
-	//if there is no match, add object to the array  
-	
-	res.json(req.body);
-	res.status(201).json({status: 'ok'})
-
+	//if there is no match, add object to the array
+	if(index == -1) {
+		arr.push(req.body);
+		res.status(201).send(req.body);
+	} else {
+		arr[index]= req.body;
+		res.status(201).send(req.body);
+	}  
  })
 
+
+ //use a route parameter to remove the item with a matching ID from the dataset
+ app.delete('/api/TodoItems', (req, res) => {
+
+	let delRes = req.body;
+ //res to the req with the deleted item
+ //res with a status code 200
+ })
 module.exports = app;
