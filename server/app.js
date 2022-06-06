@@ -43,21 +43,12 @@ app.get('/', (req, res) => {
 	res.send(arr);
  });
 
- //GET /api/TodoItems/{id} responds with an item
- app.get('/api/TodoItems', (req, res) => {
-	
-	let resItem;
-	for(let i=0; i < arr.length; i++){
-		if(arr[i].todoItemId == req.params.number){
-			resItem = arr[i];
-			arr.splice(i, 1);
-}
-
-}
-
-res.status(200).send(item);
- 
-
+ //GET /api/TodoItems/{id} responds with a single TodoItem
+ //res should be formatted in json
+ app.get('/api/TodoItems/:number', (req, res) => {
+	res.json(arr.find(function(item){
+		return item.todoItemId == req.params.number
+	}))
  })
 
  //POST responds with items and a status of 201
