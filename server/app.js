@@ -43,6 +43,23 @@ app.get('/', (req, res) => {
 	res.send(arr);
  });
 
+ //GET /api/TodoItems/{id} responds with an item
+ app.get('/api/TodoItems', (req, res) => {
+	
+	let resItem;
+	for(let i=0; i < arr.length; i++){
+		if(arr[i].todoItemId == req.params.number){
+			resItem = arr[i];
+			arr.splice(i, 1);
+}
+
+}
+
+res.status(200).send(item);
+ 
+
+ })
+
  //POST responds with items and a status of 201
  app.post('/api/TodoItems', (req, res) => {
 	//given an object
@@ -61,10 +78,21 @@ app.get('/', (req, res) => {
 
 
  //use a route parameter to remove the item with a matching ID from the dataset
- app.delete('/api/TodoItems', (req, res) => {
-
-	let delRes = req.body;
  //res to the req with the deleted item
  //res with a status code 200
+ app.delete('/api/TodoItems/:number', (req, res) => {
+	
+	let item;
+	for(let i=0; i < arr.length; i++){
+		if(arr[i].todoItemId == req.params.number){
+			item = arr[i];
+			arr.splice(i, 1);
+}
+
+}
+
+res.status(200).send(item);
+ 
+
  })
 module.exports = app;
