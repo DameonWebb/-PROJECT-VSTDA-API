@@ -53,8 +53,6 @@ app.get('/', (req, res) => {
 
  //POST responds with items and a status of 201
  app.post('/api/TodoItems', (req, res) => {
-	//given an object
-	//const task = arr.find([0]);
 	let index = arr.findIndex(task => task['todoItemId'] == req.body['todoItemId'])
 	//if the id of the incoming object matches an id in the array, replace
 	//if there is no match, add object to the array
